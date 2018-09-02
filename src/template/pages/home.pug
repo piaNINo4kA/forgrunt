@@ -1,0 +1,107 @@
+extends ../extend/default
+
+block variables
+    - var title = 'Home page';
+
+block main
+    main.content(data-page='home')
+        //+svg('vintage-logo', 'example')
+        +b.container
+            +b.select-section
+                +e.title Select currency to exhange:
+                .custom-select
+                    select
+                        option(value='1' selected="selected") USD
+                        option(value='2') USD
+                        option(value='3') EUR
+                        option(value='4') RUB
+                        option(value='5') GBP
+
+            +b.blocks
+                +b.crypto.ethereum
+                    +e.name Ethereum
+                    +e.picture
+                        img(src="static/img/ethereum.png" alt='image')
+                    +b.info
+                        +e.price
+                            .price Price:
+                            .count
+                                span $
+                                span 22 526.92
+                        +e.percent
+                            .percent Percent change
+                            .change
+                                .toggle-border
+                                    input#one(type='checkbox')
+                                    label(for='one')
+                                        .handle
+                        +e.hour
+                            .hour Hour change
+                            .hour-count.count-green +266%
+                        +e.day
+                            .day Day change
+                            .day-count.count-green +266%
+                        +e.week
+                            .week Week change
+                            .week-count.count-green +266%
+                        +e.month
+                            .month Month change
+                            .month-count.count-green +266%
+                +b.crypto.litecoin
+                    +e.name Litecoin
+                    +e.picture
+                        img(src="static/img/litecoin.png" alt='image')
+                    +b.info
+                        +e.price
+                            .price Price:
+                            .count
+                                span $
+                                span 22 526.92
+                        +e.percent
+                            .percent Percent change
+                            .change
+                                .toggle-border
+                                    input#two(type='checkbox', checked='')
+                                    label(for='two')
+                                        .handle
+                        +e.hour
+                            .hour Hour change
+                            .hour-count.count-green +266%
+                        +e.day
+                            .day Day change
+                            .day-count.count-green +266%
+                        +e.week
+                            .week Week change
+                            .week-count.count-green +266%
+                        +e.month
+                            .month Month change
+                            .month-count.count-green +266%
+                +b.crypto.bitcoin
+                    +e.name Bitcoin
+                    +e.picture
+                        img(src="static/img/bitcoin.png" alt='image')
+                    +b.info
+                        +e.price
+                            .price Price:
+                            .count
+                                span $
+                                span 22 526.92
+                        +e.percent
+                            .percent Percent change
+                            .change
+                                .toggle-border
+                                    input#three(type='checkbox', checked='')
+                                    label(for='three')
+                                        .handle
+                        +e.hour
+                            .hour Hour change
+                            .hour-count.count-green +266%
+                        +e.day
+                            .day Day change
+                            .day-count.count-green.count-red +266%
+                        +e.week
+                            .week Week change
+                            .week-count.count-green +266%
+                        +e.month
+                            .month Month change
+                            .month-count.count-green +266%

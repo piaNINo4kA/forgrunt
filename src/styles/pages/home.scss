@@ -1,0 +1,216 @@
+// home page styles
+.content {
+  background-image: url("../img/background.jpg");
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+.container {
+  max-width: 51.3vw;
+  margin: 0 auto;
+  padding-top: 69px;
+}
+.select-section {
+  display: flex;
+  padding-left: 13.5%;
+  margin-bottom: 47px;
+  padding-top: 24px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #2b3c45;
+  background-color: rgba(255, 255, 255, 0.02);
+  justify-content: space-between;
+  padding-right: 24px;
+&__title {
+    font-size: 32px;
+    line-height: 56px;
+  }
+}
+.blocks {
+  display: flex;
+  justify-content: space-between;
+}
+.crypto {
+  width: 31%;
+  height: 360px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 25px;
+  padding-left: 30px;
+  padding-top: 22px;
+  padding-bottom: 20px;
+  position: relative;
+  justify-content: space-between;
+  &__name {
+    font-size: 22px;
+  }
+  &__picture {
+    position: absolute;
+    top:5px;
+    pointer-events: none;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+}
+.info {
+  width: 100%;
+  &__price, &__percent, &__day, &__hour, &__week, &__month {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .hour, .day, .week, .month {
+    letter-spacing: -0.07em;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+  }
+  .month, .week, .day, .hour {
+    line-height: 21px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+  .percent {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .price {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .count {
+    font-size: 21px;
+    span:first-child {
+      letter-spacing: -0.2em;
+    }
+    span:nth-child(2) {
+      letter-spacing: 0.01em;
+    }
+  }
+  .hour-count {
+    font-size: 16px;
+  }
+}
+.count-green {
+  color: $green;
+}
+.count-red {
+  color: $red;
+}
+
+.change {
+  margin-top: 2px;
+}
+.ethereum {
+  background-image: url("../img/green-bg.jpg");
+}
+.litecoin {
+  background-image: url("../img/grey-bg.jpg");
+}
+.bitcoin {
+  background-image: url("../img/broun-bg.jpg");
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+label {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 15px;
+  background: #3eb5f1;
+  border-radius: 80px;
+  cursor: pointer;
+  box-shadow: inset 0 0 16px rgba(0,0,0,.3);
+  transition: background .5s;
+}
+input[type="checkbox"]:checked + label {
+  background: #bebebe;
+  box-shadow: inset 0 0 16px rgba(0,0,0,.3);
+}
+.handle {
+  position: absolute;
+  top: -5px;
+  left: -4px;
+  width: 23px;
+  height: 23px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background-image: url("../img/gradient.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: left .4s;
+}
+input[type="checkbox"]:checked + label > .handle {
+  left: calc(100% - 25px + 5px);
+}
+.custom-select {
+  position: relative;
+  font-family:Roboto-Light;
+  width: 296px;
+  line-height: 33px;
+}
+.custom-select select {
+  display: none;
+}
+.select-selected {
+  background-color: #141d26;
+  border: 1px solid #92e8fe;
+  border-radius: 5px;
+  height: 54px;
+}
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 23px;
+  right: 14px;
+  border: solid #92e8fe;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border: solid #92e8fe;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: #141d26;
+  top: 61px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border: 1px solid #92e8fe;
+  border-radius: 5px;
+  line-height: 10px;
+  padding-top: 10px;
+  padding-bottom: 9px;
+
+}
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+.same-as-selected {
+  display: none;
+}

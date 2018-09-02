@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <meta charset="UTF-8">
+  <title>Forgrunt</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
+  <style>
+    * {
+      font-family: 'Roboto', sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    header {
+      text-align: center;
+      height: 96px;
+      border-bottom: 2px #ededed solid;
+    }
+
+    header svg {
+      height: 100%;
+    }
+
+    footer {
+      font-size: 12px;
+      color: #a5a5a8;
+      padding: 45px;
+    }
+
+    .logo {
+      float: left;
+    }
+
+    .copyright {
+      float: right;
+    }
+
+    .content {
+      border-top: 2px #fff solid;
+      padding: 45px;
+      background: #ededed;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 65px;
+      border-bottom: 1px #fff solid;
+    }
+
+    .pager {
+      width: 50%;
+    }
+
+    .page {
+      display: block;
+      overflow: hidden;
+      text-decoration: none;
+      margin-top: 30px;
+    }
+
+    .page .number {
+      float: left;
+      font-size: 13px;
+      color: #a5a5a8;
+    }
+
+    .page .name {
+      padding-left: 30px;
+      font-size: 14px;
+      color: #28292a;
+      margin-bottom: 5px;
+    }
+
+    .page .description {
+      padding-left: 30px;
+      font-size: 12px;
+      color: #636363;
+    }
+
+    .click {
+      font-size: 12px;
+      color: #636363;
+      border: 2px solid #fff;
+      padding: 5px 10px;
+      display: inline-block;
+      margin-left: 30px;
+      margin-top: 10px;
+    }
+
+    .page:hover,
+    .page:hover .number,
+    .page:hover .name,
+    .page:hover .description {
+      color: #a5a5a8;
+    }
+
+    .window {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%) translateX(25%) scale(0.5);
+    }
+
+    .click:after {
+      content: 'показать';
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 4px #fff solid;
+      background: #fff;
+    }
+  </style>
+  <script>
+    var pager = [
+      ['home.html', '01', 'Home', 'Home page']
+    ];
+  </script>
+  <header></header>
+  <div class="content">
+    <div class="title">Forgrunt test</div>
+    <div class="pager"></div>
+  </div>
+  <div class="window">
+    <iframe src="" width="468" height="60" align="left">Ваш браузер не поддерживает плавающие фреймы!</iframe>
+  </div>
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+    $(document).ready(function()
+    {
+      var links = '';
+      for (var i = 0, length = pager.length; i < length; i++)
+      {
+        links += '<a class="page" href="' + pager[i][0] + '"><div class="number">' + pager[i][1] + '</div><div class="name">' + pager[i][2] + '</div><div class="description">' + pager[i][3] + '</div><div class="click"></div> </a>';
+      }
+      $('.pager').append(links);
+      $('.page .click').click(function()
+      {
+        url = $(this).parent().attr('href');
+        $('iframe').attr('src', url);
+        return false
+      });
+    });
+  </script>
+</html>

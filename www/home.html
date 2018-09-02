@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="static/css/index.css" rel="stylesheet">
+    <link rel="icon" href="static/favicon.ico">
+  </head>
+  <body>
+    <!-- SVG-->
+    <div class="svg-container" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-vintage-logo" viewBox="0 0 84.1 115.5">
+          <style>
+            .st0 {
+              fill: #000
+            }
+          </style>
+          <path d="M21.7 0H0l5.1 19.8h21.5z" />
+          <path d="M63.2 0L33.7 115.5h21L84.1 0z" />
+        </symbol>
+      </svg>
+    </div>
+    <!-- picture element HTML5 shiv-->
+    <script>
+      document.createElement('picture');
+    </script>
+    <!-- Header-->
+    <header></header>
+    <!-- Main content-->
+    <main class="content" data-page="home">
+      <!--+svg('vintage-logo', 'example')-->
+      <div class="container">
+        <div class="select-section">
+          <div class="select-section__title">Select currency to exhange:</div>
+          <div class="custom-select">
+            <select>
+              <option value="1" selected="selected">USD</option>
+              <option value="2">USD</option>
+              <option value="3">EUR</option>
+              <option value="4">RUB</option>
+              <option value="5">GBP</option>
+            </select>
+          </div>
+        </div>
+        <div class="blocks">
+          <div class="crypto ethereum">
+            <div class="crypto__name">Ethereum</div>
+            <div class="crypto__picture">
+              <img src="static/img/ethereum.png" alt="image">
+            </div>
+            <div class="info">
+              <div class="info__price">
+                <div class="price">Price:</div>
+                <div class="count">
+                  <span>$</span>
+                  <span>22 526.92</span>
+                </div>
+              </div>
+              <div class="info__percent">
+                <div class="percent">Percent change</div>
+                <div class="change">
+                  <div class="toggle-border">
+                    <input id="one" type="checkbox">
+                    <label for="one">
+                      <div class="handle"></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="info__hour">
+                <div class="hour">Hour change</div>
+                <div class="hour-count count-green">+266%</div>
+              </div>
+              <div class="info__day">
+                <div class="day">Day change</div>
+                <div class="day-count count-green">+266%</div>
+              </div>
+              <div class="info__week">
+                <div class="week">Week change</div>
+                <div class="week-count count-green">+266%</div>
+              </div>
+              <div class="info__month">
+                <div class="month">Month change</div>
+                <div class="month-count count-green">+266%</div>
+              </div>
+            </div>
+          </div>
+          <div class="crypto litecoin">
+            <div class="crypto__name">Litecoin</div>
+            <div class="crypto__picture">
+              <img src="static/img/litecoin.png" alt="image">
+            </div>
+            <div class="info">
+              <div class="info__price">
+                <div class="price">Price:</div>
+                <div class="count">
+                  <span>$</span>
+                  <span>22 526.92</span>
+                </div>
+              </div>
+              <div class="info__percent">
+                <div class="percent">Percent change</div>
+                <div class="change">
+                  <div class="toggle-border">
+                    <input id="two" type="checkbox" checked="">
+                    <label for="two">
+                      <div class="handle"></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="info__hour">
+                <div class="hour">Hour change</div>
+                <div class="hour-count count-green">+266%</div>
+              </div>
+              <div class="info__day">
+                <div class="day">Day change</div>
+                <div class="day-count count-green">+266%</div>
+              </div>
+              <div class="info__week">
+                <div class="week">Week change</div>
+                <div class="week-count count-green">+266%</div>
+              </div>
+              <div class="info__month">
+                <div class="month">Month change</div>
+                <div class="month-count count-green">+266%</div>
+              </div>
+            </div>
+          </div>
+          <div class="crypto bitcoin">
+            <div class="crypto__name">Bitcoin</div>
+            <div class="crypto__picture">
+              <img src="static/img/bitcoin.png" alt="image">
+            </div>
+            <div class="info">
+              <div class="info__price">
+                <div class="price">Price:</div>
+                <div class="count">
+                  <span>$</span>
+                  <span>22 526.92</span>
+                </div>
+              </div>
+              <div class="info__percent">
+                <div class="percent">Percent change</div>
+                <div class="change">
+                  <div class="toggle-border">
+                    <input id="three" type="checkbox" checked="">
+                    <label for="three">
+                      <div class="handle"></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="info__hour">
+                <div class="hour">Hour change</div>
+                <div class="hour-count count-green">+266%</div>
+              </div>
+              <div class="info__day">
+                <div class="day">Day change</div>
+                <div class="day-count count-green count-red">+266%</div>
+              </div>
+              <div class="info__week">
+                <div class="week">Week change</div>
+                <div class="week-count count-green">+266%</div>
+              </div>
+              <div class="info__month">
+                <div class="month">Month change</div>
+                <div class="month-count count-green">+266%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer-->
+    <footer></footer>
+    <!-- Scripts-->
+    <script src="static/js/index.js"></script>
+  </body>
+</html>
