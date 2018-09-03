@@ -5,7 +5,9 @@ block variables
 
 block main
     main.content(data-page='home')
-        //+svg('vintage-logo', 'example')
+        +b.preloader
+            +e.coin
+                img(src="static/img/coin.svg" alt='image')
         +b.container
             +b.select-section
                 +e.title Select currency to exhange:
@@ -16,7 +18,6 @@ block main
                         option(value='EUR') EUR
                         option(value='RUB') RUB
                         option(value='GBP') GBP
-
             +b.blocks
                 +b.crypto.ethereum
                     +e.name Ethereum

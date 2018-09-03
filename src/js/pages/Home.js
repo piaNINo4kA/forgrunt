@@ -8,6 +8,7 @@ import $ from 'jquery';
 
 import {Resp} from '../modules/dev/_helpers';
 import {ExchangeCurrency, CoinType, Currency, Money} from "../components/exchange-currency";
+import {Preloader} from "../components/prealoader";
 
 
 export default class Home {
@@ -28,6 +29,15 @@ export default class Home {
         };
 
         // initialize after construction
+        this.preloader = new Preloader();
+        // this.preloader.preloader();
+        this.isEthLoaded = false;
+        this.isBTCLoaded = false;
+        this.isLTCLoaded = false;
+        this.triggerEthereum = $('#ethereum');
+        this.triggerLitecoin = $('#litecoin');
+        this.triggerBitcoin = $('#bitcoin');
+
         this.currentCurrency = Currency.USD;
         this.isPercent = false;
         this.PERCENT = '%';
@@ -48,38 +58,65 @@ export default class Home {
     }
 
     updateEthereum() {
-        this.exchangeCurrency.loadData(CoinType.ETH, this.currentCurrency, this.isPercent, (data, ask) => {
+        const isPercent = this.triggerEthereum.hasClass('percent');
+        this.exchangeCurrency.loadData(CoinType.ETH, this.currentCurrency, isPercent, (data, ask) => {
+            let appendix;
+            if (isPercent) {
+                appendix = this.PERCENT;
+            } else {
+                appendix = this.money;
+            }
             $('.priceEthereum').html(this.money + parseFloat(ask).toFixed(2));
             let $ethereum = $('.ethereum');
-            $ethereum.find('.hour-count').html(data.hour + this.money);
-            $ethereum.find('.day-count').html(data.day + this.money);
-            $ethereum.find('.week-count').html(data.week + this.money);
-            $ethereum.find('.month-count').html(data.month + this.money);
+            $ethereum.find('.hour-count').html(data.hour + appendix);
+            $ethereum.find('.day-count').html(data.day + appendix);
+            $ethereum.find('.week-count').html(data.week + appendix);
+            $ethereum.find('.month-count').html(data.month + appendix);
             this.checkColor();
+            this.isEthLoaded = true;
+            this.checkDataLoaded()
         })
     }
 
     updateLitcoin() {
-        this.exchangeCurrency.loadData(CoinType.LTC, this.currentCurrency, this.isPercent, (data, ask) => {
+        const isPercent = this.triggerLitecoin.hasClass('percent');
+        this.exchangeCurrency.loadData(CoinType.LTC, this.currentCurrency, isPercent, (data, ask) => {
+            let appendix;
+            if (isPercent) {
+                appendix = this.PERCENT;
+            } else {
+                appendix = this.money;
+            }
             $('.priceLitcoin').html(this.money + parseFloat(ask).toFixed(2));
             let $litecoin = $('.litecoin');
-            $litecoin.find('.hour-count').html(data.hour + this.money);
-            $litecoin.find('.day-count').html(data.day + this.money);
-            $litecoin.find('.week-count').html(data.week + this.money);
-            $litecoin.find('.month-count').html(data.month + this.money);
+            $litecoin.find('.hour-count').html(data.hour + appendix);
+            $litecoin.find('.day-count').html(data.day + appendix);
+            $litecoin.find('.week-count').html(data.week + appendix);
+            $litecoin.find('.month-count').html(data.month + appendix);
             this.checkColor();
+            this.isLTCLoaded = true;
+            this.checkDataLoaded()
         })
     }
 
     updateBitcoin() {
-        this.exchangeCurrency.loadData(CoinType.BTC, this.currentCurrency, this.isPercent, (data, ask) => {
+        const isPercent = this.triggerBitcoin.hasClass('percent');
+        this.exchangeCurrency.loadData(CoinType.BTC, this.currentCurrency, isPercent, (data, ask) => {
+            let appendix;
+            if (isPercent) {
+                appendix = this.PERCENT;
+            } else {
+                appendix = this.money;
+            }
             $('.priceBitcoin').html(this.money + parseFloat(ask).toFixed(2));
             let $bitcoin = $('.bitcoin');
-            $bitcoin.find('.hour-count').html(data.hour + this.money);
-            $bitcoin.find('.day-count').html(data.day + this.money);
-            $bitcoin.find('.week-count').html(data.week + this.money);
-            $bitcoin.find('.month-count').html(data.month + this.money);
+            $bitcoin.find('.hour-count').html(data.hour + appendix);
+            $bitcoin.find('.day-count').html(data.day + appendix);
+            $bitcoin.find('.week-count').html(data.week + appendix);
+            $bitcoin.find('.month-count').html(data.month + appendix);
             this.checkColor();
+            this.isBTCLoaded = true;
+            this.checkDataLoaded()
         })
     }
     checkColor() {
@@ -130,33 +167,33 @@ export default class Home {
 
             if($trigger.hasClass('percent')) {
                 if($trigger.is('#ethereum')) {
-                    this.isPercent = true;
                     this.updateEthereum();
                 }
                 else if($trigger.is('#litecoin')) {
-                    this.isPercent = true;
                     this.updateLitcoin();
                 }
                 else if($trigger.is('#bitcoin')) {
-                    this.isPercent = true;
                     this.updateBitcoin();
                 }
             }
             else {
                 if($trigger.is('#ethereum')) {
-                    this.isPercent = false;
                     this.updateEthereum();
                 }
                 else if($trigger.is('#litecoin')) {
-                    this.isPercent = false;
                     this.updateLitcoin();
                 }
                 else if($trigger.is('#bitcoin')) {
-                    this.isPercent = false;
                     this.updateBitcoin();
                 }
             }
         })
+    }
+
+    checkDataLoaded() {
+        if (this.isBTCLoaded || this.isEthLoaded || this.isLTCLoaded) {
+            this.preloader.hidePreloader();
+        }
     }
     /**
      * Example method.

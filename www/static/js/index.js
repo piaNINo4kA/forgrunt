@@ -11117,6 +11117,8 @@ var _helpers = __webpack_require__(1);
 
 var _exchangeCurrency = __webpack_require__(8);
 
+var _prealoader = __webpack_require__(9);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11141,6 +11143,15 @@ var Home = function () {
         }();
 
         // initialize after construction
+        this.preloader = new _prealoader.Preloader();
+        // this.preloader.preloader();
+        this.isEthLoaded = false;
+        this.isBTCLoaded = false;
+        this.isLTCLoaded = false;
+        this.triggerEthereum = (0, _jquery2.default)('#ethereum');
+        this.triggerLitecoin = (0, _jquery2.default)('#litecoin');
+        this.triggerBitcoin = (0, _jquery2.default)('#bitcoin');
+
         this.currentCurrency = _exchangeCurrency.Currency.USD;
         this.isPercent = false;
         this.PERCENT = '%';
@@ -11164,14 +11175,23 @@ var Home = function () {
         value: function updateEthereum() {
             var _this = this;
 
-            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.ETH, this.currentCurrency, this.isPercent, function (data, ask) {
+            var isPercent = this.triggerEthereum.hasClass('percent');
+            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.ETH, this.currentCurrency, isPercent, function (data, ask) {
+                var appendix = void 0;
+                if (isPercent) {
+                    appendix = _this.PERCENT;
+                } else {
+                    appendix = _this.money;
+                }
                 (0, _jquery2.default)('.priceEthereum').html(_this.money + parseFloat(ask).toFixed(2));
                 var $ethereum = (0, _jquery2.default)('.ethereum');
-                $ethereum.find('.hour-count').html(data.hour + _this.money);
-                $ethereum.find('.day-count').html(data.day + _this.money);
-                $ethereum.find('.week-count').html(data.week + _this.money);
-                $ethereum.find('.month-count').html(data.month + _this.money);
+                $ethereum.find('.hour-count').html(data.hour + appendix);
+                $ethereum.find('.day-count').html(data.day + appendix);
+                $ethereum.find('.week-count').html(data.week + appendix);
+                $ethereum.find('.month-count').html(data.month + appendix);
                 _this.checkColor();
+                _this.isEthLoaded = true;
+                _this.checkDataLoaded();
             });
         }
     }, {
@@ -11179,14 +11199,23 @@ var Home = function () {
         value: function updateLitcoin() {
             var _this2 = this;
 
-            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.LTC, this.currentCurrency, this.isPercent, function (data, ask) {
+            var isPercent = this.triggerLitecoin.hasClass('percent');
+            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.LTC, this.currentCurrency, isPercent, function (data, ask) {
+                var appendix = void 0;
+                if (isPercent) {
+                    appendix = _this2.PERCENT;
+                } else {
+                    appendix = _this2.money;
+                }
                 (0, _jquery2.default)('.priceLitcoin').html(_this2.money + parseFloat(ask).toFixed(2));
                 var $litecoin = (0, _jquery2.default)('.litecoin');
-                $litecoin.find('.hour-count').html(data.hour + _this2.money);
-                $litecoin.find('.day-count').html(data.day + _this2.money);
-                $litecoin.find('.week-count').html(data.week + _this2.money);
-                $litecoin.find('.month-count').html(data.month + _this2.money);
+                $litecoin.find('.hour-count').html(data.hour + appendix);
+                $litecoin.find('.day-count').html(data.day + appendix);
+                $litecoin.find('.week-count').html(data.week + appendix);
+                $litecoin.find('.month-count').html(data.month + appendix);
                 _this2.checkColor();
+                _this2.isLTCLoaded = true;
+                _this2.checkDataLoaded();
             });
         }
     }, {
@@ -11194,14 +11223,23 @@ var Home = function () {
         value: function updateBitcoin() {
             var _this3 = this;
 
-            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.BTC, this.currentCurrency, this.isPercent, function (data, ask) {
+            var isPercent = this.triggerBitcoin.hasClass('percent');
+            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.BTC, this.currentCurrency, isPercent, function (data, ask) {
+                var appendix = void 0;
+                if (isPercent) {
+                    appendix = _this3.PERCENT;
+                } else {
+                    appendix = _this3.money;
+                }
                 (0, _jquery2.default)('.priceBitcoin').html(_this3.money + parseFloat(ask).toFixed(2));
                 var $bitcoin = (0, _jquery2.default)('.bitcoin');
-                $bitcoin.find('.hour-count').html(data.hour + _this3.money);
-                $bitcoin.find('.day-count').html(data.day + _this3.money);
-                $bitcoin.find('.week-count').html(data.week + _this3.money);
-                $bitcoin.find('.month-count').html(data.month + _this3.money);
+                $bitcoin.find('.hour-count').html(data.hour + appendix);
+                $bitcoin.find('.day-count').html(data.day + appendix);
+                $bitcoin.find('.week-count').html(data.week + appendix);
+                $bitcoin.find('.month-count').html(data.month + appendix);
                 _this3.checkColor();
+                _this3.isBTCLoaded = true;
+                _this3.checkDataLoaded();
             });
         }
     }, {
@@ -11258,28 +11296,29 @@ var Home = function () {
 
                 if ($trigger.hasClass('percent')) {
                     if ($trigger.is('#ethereum')) {
-                        _this5.isPercent = true;
                         _this5.updateEthereum();
                     } else if ($trigger.is('#litecoin')) {
-                        _this5.isPercent = true;
                         _this5.updateLitcoin();
                     } else if ($trigger.is('#bitcoin')) {
-                        _this5.isPercent = true;
                         _this5.updateBitcoin();
                     }
                 } else {
                     if ($trigger.is('#ethereum')) {
-                        _this5.isPercent = false;
                         _this5.updateEthereum();
                     } else if ($trigger.is('#litecoin')) {
-                        _this5.isPercent = false;
                         _this5.updateLitcoin();
                     } else if ($trigger.is('#bitcoin')) {
-                        _this5.isPercent = false;
                         _this5.updateBitcoin();
                     }
                 }
             });
+        }
+    }, {
+        key: 'checkDataLoaded',
+        value: function checkDataLoaded() {
+            if (this.isBTCLoaded || this.isEthLoaded || this.isLTCLoaded) {
+                this.preloader.hidePreloader();
+            }
         }
         /**
          * Example method.
@@ -11377,6 +11416,45 @@ var Money = exports.Money = {
     RUB: "₽",
     POUND: "£"
 };
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Preloader = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _helpers = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Preloader = exports.Preloader = function () {
+    function Preloader() {
+        _classCallCheck(this, Preloader);
+    }
+
+    _createClass(Preloader, [{
+        key: 'hidePreloader',
+        value: function hidePreloader() {
+            (0, _jquery2.default)('.preloader').fadeOut(1000);
+        }
+    }]);
+
+    return Preloader;
+}();
 
 /***/ })
 /******/ ]);

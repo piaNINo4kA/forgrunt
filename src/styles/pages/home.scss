@@ -104,6 +104,11 @@
   position: relative;
   justify-content: space-between;
   margin-bottom: 15px;
+  transition: transform .200s;
+  &:hover {
+    transform: scale(1.01);
+    transition: transform .200s;
+  }
   @media screen and (max-width: $tablet) {
     width: 32%;
     padding-left: 15px;
@@ -217,7 +222,7 @@ input[type="checkbox"]:checked + label > .handle {
 }
 .custom-select {
   position: relative;
-  font-family:Roboto-Light;
+  font-family: Roboto-Light, Arial;
   width: 296px;
   line-height: 33px;
   @media screen and (max-width: $tablet) {
@@ -238,6 +243,12 @@ input[type="checkbox"]:checked + label > .handle {
   border: 1px solid #92e8fe;
   border-radius: 5px;
   height: 54px;
+  transition: filter .3s;
+  &:hover {
+    -webkit-filter: brightness(200%); /* Safari */
+    filter: brightness(200%);
+    transition: filter .3s;
+  }
   @media screen and (max-width: $mobile) and (orientation: landscape){
     height: 40px;
     line-height: 20px;
@@ -287,6 +298,11 @@ input[type="checkbox"]:checked + label > .handle {
   line-height: 10px;
   padding-top: 10px;
   padding-bottom: 9px;
+  transition: background-color .3s;
+  div:hover {
+    transition: background-color .3s;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 
 }
 /*hide the items when the select box is closed:*/
