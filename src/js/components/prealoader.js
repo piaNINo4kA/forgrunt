@@ -1,5 +1,4 @@
-import $ from 'jquery'
-import {$window} from "../modules/dev/_helpers";
+import $ from 'jquery';
 
 export class Preloader {
     hidePreloader() {

@@ -27,7 +27,7 @@ export class ExchangeCurrency {
             })
     }
 }
-
+//collections
 export const  CoinType = {
     LTC: "LTC",
     BTC: "BTC",

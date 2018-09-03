@@ -30,7 +30,6 @@ export default class Home {
 
         // initialize after construction
         this.preloader = new Preloader();
-        // this.preloader.preloader();
         this.isEthLoaded = false;
         this.isBTCLoaded = false;
         this.isLTCLoaded = false;
@@ -56,7 +55,7 @@ export default class Home {
         this.money = Money.DOLLAR;
         this.init();
     }
-
+//updates for each coin types
     updateEthereum() {
         const isPercent = this.triggerEthereum.hasClass('percent');
         this.exchangeCurrency.loadData(CoinType.ETH, this.currentCurrency, isPercent, (data, ask) => {
@@ -119,6 +118,7 @@ export default class Home {
             this.checkDataLoaded()
         })
     }
+//check the color of quantity
     checkColor() {
         let count = $('.count-color');
         count.each((index, element) => {
@@ -131,7 +131,7 @@ export default class Home {
             }
         });
     }
-
+//select currency
     selectCurrencyListener() {
         this.$select.click((event) => {
             this.currentCurrency = $(event.currentTarget).data('currency');
@@ -157,7 +157,7 @@ export default class Home {
         })
 
     }
-
+//trigger
     selectPercentageListener() {
         this.$checkbox.click((event) => {
             let $trigger = $(event.currentTarget);
@@ -189,7 +189,7 @@ export default class Home {
             }
         })
     }
-
+//preloader
     checkDataLoaded() {
         if (this.isBTCLoaded || this.isEthLoaded || this.isLTCLoaded) {
             this.preloader.hidePreloader();
