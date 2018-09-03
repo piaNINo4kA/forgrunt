@@ -11006,11 +11006,14 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var x, i, j, selElmnt, a, b, c;
+var x, i, j, selElmnt, a, b, c, currencyValue;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select");
 for (i = 0; i < x.length; i++) {
     selElmnt = x[i].getElementsByTagName("select")[0];
+    var $option = (0, _jquery2.default)('option');
+
+    console.log($option.val());
     /*for each element, create a new DIV that will act as the selected item:*/
     a = document.createElement("DIV");
     a.setAttribute("class", "select-selected");
@@ -11019,12 +11022,13 @@ for (i = 0; i < x.length; i++) {
     /*for each element, create a new DIV that will contain the option list:*/
     b = document.createElement("DIV");
     b.setAttribute("class", "select-items select-hide");
-    // b.getElementsByClassName('same-as-selected').style.display = 'none';
     for (j = 1; j < selElmnt.length; j++) {
         /*for each option in the original select element,
         create a new DIV that will act as an option item:*/
+        currencyValue = selElmnt.options[j].value;
         c = document.createElement("DIV");
         c.innerHTML = selElmnt.options[j].innerHTML;
+        c.setAttribute('data-currency', currencyValue);
         if (j === 1) {
             c.setAttribute("class", "same-as-selected");
         }
@@ -11095,7 +11099,7 @@ document.addEventListener("click", closeAllSelect);
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
@@ -11104,59 +11108,275 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @module Home
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var _helpers = __webpack_require__(1);
+
+var _exchangeCurrency = __webpack_require__(8);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Home = function () {
-  /**
-   * Cache data, make preparations and initialize page scripts.
-   */
-  function Home() {
-    _classCallCheck(this, Home);
-
-    this.message = function () {
-      var message = 'Home page scripts initialized on';
-
-      if (_helpers.Resp.isDesk) {
-        return message + ' Desktop';
-      } else if (_helpers.Resp.isTablet) {
-        return message + ' Tablet';
-      } else if (_helpers.Resp.isMobile) {
-        return message + ' Mobile';
-      }
-    }();
-
-    // initialize after construction
-    this.init();
-  }
-
-  /**
-   * Example method.
-   */
-
-
-  _createClass(Home, [{
-    key: 'example',
-    value: function example() {
-      console.log(this.message);
-    }
-  }, {
-    key: 'init',
-
-
     /**
-     * Initialize Home page scripts.
+     * Cache data, make preparations and initialize page scripts.
      */
-    value: function init() {
-      this.example();
-    }
-  }]);
+    function Home() {
+        _classCallCheck(this, Home);
 
-  return Home;
+        this.message = function () {
+            var message = 'Home page scripts initialized on';
+
+            if (_helpers.Resp.isDesk) {
+                return message + ' Desktop';
+            } else if (_helpers.Resp.isTablet) {
+                return message + ' Tablet';
+            } else if (_helpers.Resp.isMobile) {
+                return message + ' Mobile';
+            }
+        }();
+
+        // initialize after construction
+        this.currentCurrency = _exchangeCurrency.Currency.USD;
+        this.isPercent = false;
+        this.exchangeCurrency = new _exchangeCurrency.ExchangeCurrency();
+        this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.BTC, _exchangeCurrency.Currency.USD, this.isPercent, function (date, ask) {});
+        this.updateBitcoin();
+        this.updateEthereum();
+        this.updateLitcoin();
+        this.$countColor = (0, _jquery2.default)('.count-color').html();
+
+        this.$select = (0, _jquery2.default)('.select-items').find('div');
+        this.selectCurrencyListener();
+        this.$checkbox = (0, _jquery2.default)('.checkbox');
+        this.selectPercentageListener();
+        this.money = _exchangeCurrency.Money.DOLLAR;
+        this.init();
+    }
+
+    _createClass(Home, [{
+        key: 'updateEthereum',
+        value: function updateEthereum() {
+            var _this = this;
+
+            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.ETH, this.currentCurrency, this.isPercent, function (data, ask) {
+                (0, _jquery2.default)('.priceEthereum').html(_this.money + parseFloat(ask).toFixed(2));
+                var $ethereum = (0, _jquery2.default)('.ethereum');
+                $ethereum.find('.hour-count').html(data.hour + _this.money);
+                $ethereum.find('.day-count').html(data.day + _this.money);
+                $ethereum.find('.week-count').html(data.week + _this.money);
+                $ethereum.find('.month-count').html(data.month + _this.money);
+                _this.checkColor();
+            });
+        }
+    }, {
+        key: 'updateLitcoin',
+        value: function updateLitcoin() {
+            var _this2 = this;
+
+            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.LTC, this.currentCurrency, this.isPercent, function (data, ask) {
+                (0, _jquery2.default)('.priceLitcoin').html(_this2.money + parseFloat(ask).toFixed(2));
+                var $litecoin = (0, _jquery2.default)('.litecoin');
+                $litecoin.find('.hour-count').html(data.hour + _this2.money);
+                $litecoin.find('.day-count').html(data.day + _this2.money);
+                $litecoin.find('.week-count').html(data.week + _this2.money);
+                $litecoin.find('.month-count').html(data.month + _this2.money);
+                _this2.checkColor();
+            });
+        }
+    }, {
+        key: 'updateBitcoin',
+        value: function updateBitcoin() {
+            var _this3 = this;
+
+            this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.BTC, this.currentCurrency, this.isPercent, function (data, ask) {
+                (0, _jquery2.default)('.priceBitcoin').html(_this3.money + parseFloat(ask).toFixed(2));
+                var $bitcoin = (0, _jquery2.default)('.bitcoin');
+                $bitcoin.find('.hour-count').html(data.hour + _this3.money);
+                $bitcoin.find('.day-count').html(data.day + _this3.money);
+                $bitcoin.find('.week-count').html(data.week + _this3.money);
+                $bitcoin.find('.month-count').html(data.month + _this3.money);
+                _this3.checkColor();
+            });
+        }
+    }, {
+        key: 'checkColor',
+        value: function checkColor() {
+            var count = (0, _jquery2.default)('.count-color');
+            count.each(function (index, element) {
+                var number = parseFloat((0, _jquery2.default)(element).text());
+                if (number < 0) {
+                    (0, _jquery2.default)(element).removeClass('count-green').addClass('count-red');
+                } else {
+                    (0, _jquery2.default)(element).removeClass('count-red').addClass('count-green');
+                }
+            });
+        }
+    }, {
+        key: 'selectCurrencyListener',
+        value: function selectCurrencyListener() {
+            var _this4 = this;
+
+            this.$select.click(function (event) {
+                _this4.currentCurrency = (0, _jquery2.default)(event.currentTarget).data('currency');
+                switch (true) {
+                    case _this4.currentCurrency == "USD":
+                        _this4.money = _exchangeCurrency.Money.DOLLAR;
+                        break;
+                    case _this4.currentCurrency == "RUB":
+                        _this4.money = _exchangeCurrency.Money.RUB;
+                        break;
+                    case _this4.currentCurrency == "EUR":
+                        _this4.money = _exchangeCurrency.Money.EURO;
+                        break;
+                    case _this4.currentCurrency == "GBP":
+                        _this4.money = _exchangeCurrency.Money.POUND;
+                        break;
+                    default:
+                        _this4.money = _exchangeCurrency.Money.PERCENT;
+                }
+                _this4.updateBitcoin();
+                _this4.updateEthereum();
+                _this4.updateLitcoin();
+            });
+        }
+    }, {
+        key: 'selectPercentageListener',
+        value: function selectPercentageListener() {
+            var _this5 = this;
+
+            this.$checkbox.click(function (event) {
+                var $trigger = (0, _jquery2.default)(event.currentTarget);
+                if ($trigger.attr('checked', '')) {
+                    $trigger.toggleClass('money');
+                }
+
+                if ($trigger.hasClass('money')) {
+                    if ($trigger.is('#ethereum')) {
+                        _this5.isPercent = true;
+                        _this5.updateEthereum();
+                    } else if ($trigger.is('#litecoin')) {
+                        _this5.isPercent = true;
+                        _this5.updateLitcoin();
+                    } else if ($trigger.is('#bitcoin')) {
+                        _this5.isPercent = true;
+                        _this5.updateBitcoin();
+                    }
+                } else {
+                    if ($trigger.is('#ethereum')) {
+                        _this5.isPercent = false;
+                        _this5.updateEthereum();
+                    } else if ($trigger.is('#litecoin')) {
+                        _this5.isPercent = false;
+                        _this5.updateLitcoin();
+                    } else if ($trigger.is('#bitcoin')) {
+                        _this5.isPercent = false;
+                        _this5.updateBitcoin();
+                    }
+                }
+            });
+        }
+        /**
+         * Example method.
+         */
+
+    }, {
+        key: 'example',
+        value: function example() {
+
+            console.log(this.message);
+        }
+    }, {
+        key: 'init',
+
+
+        /**
+         * Initialize Home page scripts.
+         */
+        value: function init() {
+            this.example();
+        }
+    }]);
+
+    return Home;
 }();
 
 exports.default = Home;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ExchangeCurrency = exports.ExchangeCurrency = function () {
+    function ExchangeCurrency() {
+        _classCallCheck(this, ExchangeCurrency);
+
+        this.baseUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
+    }
+    //callback = back json data
+
+
+    _createClass(ExchangeCurrency, [{
+        key: "loadData",
+        value: function loadData(coinType, currency, isPercent, callback) {
+            var requestUrl = this.baseUrl + coinType + currency;
+            fetch(requestUrl)
+            //get data
+            .then(function (response) {
+                return response.json();
+            }).then(function (jsonData) {
+                //check if is percents
+                var result = void 0;
+                var ask = void 0;
+                ask = jsonData.ask;
+                if (isPercent) {
+                    result = jsonData.changes.percent;
+                } else result = jsonData.changes.price;
+                callback(result, ask);
+            }).catch(function (error) {
+                // alert(error);
+            });
+        }
+    }]);
+
+    return ExchangeCurrency;
+}();
+
+var CoinType = exports.CoinType = {
+    LTC: "LTC",
+    BTC: "BTC",
+    ETH: "ETH"
+};
+
+var Currency = exports.Currency = {
+    USD: "USD",
+    EUR: "EUR",
+    RUB: "RUB",
+    GBP: "GBP"
+};
+
+var Money = exports.Money = {
+    DOLLAR: "$",
+    EURO: "€",
+    RUB: "₽",
+    POUND: "£",
+    PERCENT: "%"
+};
 
 /***/ })
 /******/ ]);

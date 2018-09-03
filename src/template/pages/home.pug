@@ -11,11 +11,11 @@ block main
                 +e.title Select currency to exhange:
                 .custom-select
                     select
-                        option(value='1' selected="selected") USD
-                        option(value='2') USD
-                        option(value='3') EUR
-                        option(value='4') RUB
-                        option(value='5') GBP
+                        option(value='default') USD
+                        option(value='USD') USD
+                        option(value='EUR') EUR
+                        option(value='RUB') RUB
+                        option(value='GBP') GBP
 
             +b.blocks
                 +b.crypto.ethereum
@@ -26,27 +26,26 @@ block main
                         +e.price
                             .price Price:
                             .count
-                                span $
-                                span 22 526.92
+                                span.priceEthereum 0
                         +e.percent
                             .percent Percent change
                             .change
                                 .toggle-border
-                                    input#one(type='checkbox')
-                                    label(for='one')
+                                    input#ethereum.checkbox(type='checkbox' checked="checked")
+                                    label(for='ethereum')
                                         .handle
                         +e.hour
                             .hour Hour change
-                            .hour-count.count-green +266%
+                            .hour-count.count-color 0
                         +e.day
                             .day Day change
-                            .day-count.count-green +266%
+                            .day-count.count-color 0
                         +e.week
                             .week Week change
-                            .week-count.count-green +266%
+                            .week-count.count-color 0
                         +e.month
                             .month Month change
-                            .month-count.count-green +266%
+                            .month-count.count-color 0
                 +b.crypto.litecoin
                     +e.name Litecoin
                     +e.picture
@@ -55,27 +54,26 @@ block main
                         +e.price
                             .price Price:
                             .count
-                                span $
-                                span 22 526.92
+                                span.priceLitcoin 0
                         +e.percent
                             .percent Percent change
                             .change
                                 .toggle-border
-                                    input#two(type='checkbox', checked='')
-                                    label(for='two')
+                                    input#litecoin.checkbox(type='checkbox' checked="checked")
+                                    label(for='litecoin')
                                         .handle
                         +e.hour
                             .hour Hour change
-                            .hour-count.count-green +266%
+                            .hour-count.count-color 0
                         +e.day
                             .day Day change
-                            .day-count.count-green +266%
+                            .day-count.count-color 0
                         +e.week
                             .week Week change
-                            .week-count.count-green +266%
+                            .week-count.count-color 0
                         +e.month
                             .month Month change
-                            .month-count.count-green +266%
+                            .month-count.count-color 0
                 +b.crypto.bitcoin
                     +e.name Bitcoin
                     +e.picture
@@ -84,24 +82,23 @@ block main
                         +e.price
                             .price Price:
                             .count
-                                span $
-                                span 22 526.92
+                                span.priceBitcoin 0
                         +e.percent
                             .percent Percent change
                             .change
                                 .toggle-border
-                                    input#three(type='checkbox', checked='')
-                                    label(for='three')
+                                    input#bitcoin.checkbox(type='checkbox' checked="checked")
+                                    label(for='bitcoin')
                                         .handle
                         +e.hour
                             .hour Hour change
-                            .hour-count.count-green +266%
+                            .hour-count.count-color 0
                         +e.day
                             .day Day change
-                            .day-count.count-green.count-red +266%
+                            .day-count.count-color 0
                         +e.week
                             .week Week change
-                            .week-count.count-green +266%
+                            .week-count.count-color 0
                         +e.month
                             .month Month change
-                            .month-count.count-green +266%
+                            .month-count.count-color 0

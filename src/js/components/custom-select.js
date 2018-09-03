@@ -1,10 +1,13 @@
 import $ from 'jquery';
 
-var x, i, j, selElmnt, a, b, c;
+var x, i, j, selElmnt, a, b, c, currencyValue;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select");
 for (i = 0; i < x.length; i++) {
     selElmnt = x[i].getElementsByTagName("select")[0];
+    let $option = $('option');
+
+    console.log($option.val());
     /*for each element, create a new DIV that will act as the selected item:*/
     a = document.createElement("DIV");
     a.setAttribute("class", "select-selected");
@@ -13,14 +16,15 @@ for (i = 0; i < x.length; i++) {
     /*for each element, create a new DIV that will contain the option list:*/
     b = document.createElement("DIV");
     b.setAttribute("class", "select-items select-hide");
-    // b.getElementsByClassName('same-as-selected').style.display = 'none';
     for (j = 1; j < selElmnt.length; j++) {
         /*for each option in the original select element,
         create a new DIV that will act as an option item:*/
+        currencyValue = selElmnt.options[j].value;
         c = document.createElement("DIV");
         c.innerHTML = selElmnt.options[j].innerHTML;
+        c.setAttribute('data-currency', currencyValue);
         if (j === 1) {
-            c.setAttribute("class", "same-as-selected")
+            c.setAttribute("class", "same-as-selected");
         }
         c.addEventListener("click", function(e) {
             /*when an item is clicked, update the original select box,

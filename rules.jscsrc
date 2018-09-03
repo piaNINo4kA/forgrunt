@@ -6,5 +6,7 @@
   "disallowTrailingWhitespace": null,
   "validateLineBreaks": null,
   "requireTrailingComma": null,
-  "excludeFiles": ["/gulp/*", "gulpfile.js", "webpack.config.js"]
+  "excludeFiles": ["/gulp/*", "gulpfile.js", "webpack.config.js",
+    "./src/js/components/exchange-currency.js"
+  ]
 }
