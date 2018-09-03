@@ -30,6 +30,7 @@ export default class Home {
         // initialize after construction
         this.currentCurrency = Currency.USD;
         this.isPercent = false;
+        this.PERCENT = '%';
         this.exchangeCurrency = new ExchangeCurrency();
         this.exchangeCurrency.loadData(CoinType.BTC, Currency.USD, this.isPercent, (date, ask) => {
         });
@@ -111,7 +112,7 @@ export default class Home {
                     this.money = Money.POUND;
                     break;
                 default:
-                    this.money = Money.PERCENT;
+                    this.money = Money.DOLLAR;
             }
             this.updateBitcoin();
             this.updateEthereum();
@@ -124,10 +125,10 @@ export default class Home {
         this.$checkbox.click((event) => {
             let $trigger = $(event.currentTarget);
             if ($trigger.attr('checked', '')) {
-                $trigger.toggleClass('money');
+                $trigger.toggleClass('percent');
             }
 
-            if($trigger.hasClass('money')) {
+            if($trigger.hasClass('percent')) {
                 if($trigger.is('#ethereum')) {
                     this.isPercent = true;
                     this.updateEthereum();

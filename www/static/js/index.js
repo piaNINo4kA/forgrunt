@@ -11143,6 +11143,7 @@ var Home = function () {
         // initialize after construction
         this.currentCurrency = _exchangeCurrency.Currency.USD;
         this.isPercent = false;
+        this.PERCENT = '%';
         this.exchangeCurrency = new _exchangeCurrency.ExchangeCurrency();
         this.exchangeCurrency.loadData(_exchangeCurrency.CoinType.BTC, _exchangeCurrency.Currency.USD, this.isPercent, function (date, ask) {});
         this.updateBitcoin();
@@ -11237,7 +11238,7 @@ var Home = function () {
                         _this4.money = _exchangeCurrency.Money.POUND;
                         break;
                     default:
-                        _this4.money = _exchangeCurrency.Money.PERCENT;
+                        _this4.money = _exchangeCurrency.Money.DOLLAR;
                 }
                 _this4.updateBitcoin();
                 _this4.updateEthereum();
@@ -11252,10 +11253,10 @@ var Home = function () {
             this.$checkbox.click(function (event) {
                 var $trigger = (0, _jquery2.default)(event.currentTarget);
                 if ($trigger.attr('checked', '')) {
-                    $trigger.toggleClass('money');
+                    $trigger.toggleClass('percent');
                 }
 
-                if ($trigger.hasClass('money')) {
+                if ($trigger.hasClass('percent')) {
                     if ($trigger.is('#ethereum')) {
                         _this5.isPercent = true;
                         _this5.updateEthereum();
@@ -11374,8 +11375,7 @@ var Money = exports.Money = {
     DOLLAR: "$",
     EURO: "€",
     RUB: "₽",
-    POUND: "£",
-    PERCENT: "%"
+    POUND: "£"
 };
 
 /***/ })

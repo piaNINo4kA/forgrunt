@@ -46,5 +46,4 @@ export const Money = {
     EURO: "€",
     RUB: "₽",
     POUND: "£",
-    PERCENT: "%"
 }
